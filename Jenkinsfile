@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         NETLIFY_SITE_ID = '1e6dc70a-c410-4284-adb3-7fe467f20c75' // Add your Netlify Site ID
-        NETLIFY_ACCESS_TOKEN = credentials(NETLIFY_ACCESS_TOKEN) // Reference the credential you created
+        NETLIFY_ACCESS_TOKEN = credentials('NETLIFY_ACCESS_TOKEN') // Reference the credential you created
     }
 
     stages {
