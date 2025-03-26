@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from GitHub (or any source you are using)
-                git 'https://github.com/PritamChaudhari23/jenkins-react.git'
+                git branch: 'main', url: 'https://github.com/PritamChaudhari23/jenkins-react.git'
             }
         }
 
