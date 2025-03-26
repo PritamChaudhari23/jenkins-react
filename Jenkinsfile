@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Assuming it's a Node.js app, install dependencies
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Build the app (for a React app, for example)
-                    sh 'npm run build'
+                    bat 'npm run build'
                 }
             }
         }
@@ -36,10 +36,10 @@ pipeline {
             steps {
                 script {
                     // Authenticate with Netlify using the access token
-                    sh 'netlify login --token $NETLIFY_ACCESS_TOKEN'
+                    bat 'netlify login --token $NETLIFY_ACCESS_TOKEN'
                     
                     // Deploy to Netlify (using the site ID)
-                    sh 'netlify deploy --prod --dir=./build --site $NETLIFY_SITE_ID'
+                    bat 'netlify deploy --prod --dir=./build --site $NETLIFY_SITE_ID'
                 }
             }
         }
