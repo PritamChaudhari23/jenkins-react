@@ -41,6 +41,9 @@ pipeline {
 
                   // Debugging step to check the token (only for testing, do not log this in production)
             bat 'echo %NETLIFY_AUTH_TOKEN%'
+
+              // Try logging in using the token to ensure proper authentication
+            bat 'netlify login --token %NETLIFY_AUTH_TOKEN%'  // Use the token to log in
             
             // Verify authentication by checking the currently logged-in user
             bat 'netlify status'
