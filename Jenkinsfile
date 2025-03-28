@@ -43,7 +43,7 @@ pipeline {
             bat 'echo %NETLIFY_AUTH_TOKEN%'
             
             // Verify authentication by checking the currently logged-in user
-            bat 'netlify whoami'
+            bat 'netlify status'
 
                 // Deploy to Netlify (using the site ID)
                 bat 'netlify deploy --prod --dir=./build --site %NETLIFY_SITE_ID%'
