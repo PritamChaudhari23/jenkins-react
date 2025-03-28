@@ -32,27 +32,20 @@ pipeline {
             }
         }
 
-     stage('Deploy to Netlify') {
-        steps {
-            script {
-                // Set the environment variable for the Netlify access token
-                bat 'set NETLIFY_AUTH_TOKEN=%NETLIFY_ACCESS_TOKEN%'
+        stage('Deploy to Netlify') {
+            steps {
+                script {
+                    // Set the environment variable for the Netlify access token
+                    bat 'set NETLIFY_AUTH_TOKEN=%NETLIFY_ACCESS_TOKEN%'
 
-
-                  // Debugging step to check the token (only for testing, do not log this in production)
-            bat 'echo %NETLIFY_AUTH_TOKEN%'
-
-              // Try logging in using the token to ensure proper authentication
-            bat 'netlify login' 
-            
-            // Verify authentication by checking the currently logged-in user
-            bat 'netlify status'
-
-                // Deploy to Netlify (using the site ID)
-                bat 'netlify deploy --prod --dir=./build --site %NETLIFY_SITE_ID%'
+                    // Try logging in using the token to ensure proper authentication
+                    bat 'netlify login' 
+                
+                    // Deploy to Netlify (using the site ID)
+                    bat 'netlify deploy --prod --dir=./dist --site %NETLIFY_SITE_ID%'
+                }
             }
         }
-    }
 
     }
 
