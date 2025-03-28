@@ -43,7 +43,7 @@ pipeline {
             bat 'echo %NETLIFY_AUTH_TOKEN%'
 
               // Try logging in using the token to ensure proper authentication
-            bat 'netlify login --token %NETLIFY_AUTH_TOKEN%'  // Use the token to log in
+            bat 'netlify login' 
             
             // Verify authentication by checking the currently logged-in user
             bat 'netlify status'
