@@ -32,17 +32,18 @@ pipeline {
             }
         }
 
-        stage('Deploy to Netlify') {
-            steps {
-                script {
-                    // Authenticate with Netlify using the access token
-                    bat 'netlify login --token $NETLIFY_ACCESS_TOKEN'
-                    
-                    // Deploy to Netlify (using the site ID)
-                    bat 'netlify deploy --prod --dir=./build --site $NETLIFY_SITE_ID'
-                }
+     stage('Deploy to Netlify') {
+        steps {
+            script {
+                // Set the environment variable for the Netlify access token
+                bat 'set NETLIFY_AUTH_TOKEN=%NETLIFY_ACCESS_TOKEN%'
+
+                // Deploy to Netlify (using the site ID)
+                bat 'netlify deploy --prod --dir=./build --site %NETLIFY_SITE_ID%'
             }
         }
+    }
+
     }
 
     post {
