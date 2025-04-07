@@ -2,14 +2,19 @@ pipeline {
     agent any
 
     environment {
-        
+        DEV_SERVER = 'dev-ec2-ip'
+        UAT_SERVER = 'uat-ec2-ip'
+        PROD_SERVER = 'prod-ec2-ip'
+        DEV_SSH_KEY = credentials('dev-ssh-key') 
+        UAT_SSH_KEY = credentials('uat-ssh-key')    
+        PROD_SSH_KEY = credentials('prod-ssh-key') 
     }
 
     stages {
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install node, git, npm in EC2
+                    // Install node, git, npm in EC2 OR This can be doe during initial setup
                 }
             }
         }
@@ -29,14 +34,53 @@ pipeline {
             }
         }
 
-        stage('Deploy to EC2') {
+        stage('Deploy to Dev') {
+            when {
+                branch 'dev'
+            }
             steps {
                 script {
-
+                    echo "Deploying to DEV server"
+                    sh '''
+                    ssh -i ${DEV_SSH_KEY} ec2-user@${DEV_SERVER} << EOF
+                    cd /path/to/your/app && git pull origin dev && ./deploy.sh
+                    EOF
+                    '''
                 }
             }
         }
 
+        stage('Deploy to UAT') {
+            when {
+                branch 'uat'
+            }
+            steps {
+                script {
+                    echo "Deploying to UAT server"
+                    sh '''
+                    ssh -i ${UAT_SSH_KEY} ec2-user@${UAT_SERVER} << EOF
+                    cd /path/to/your/app && git pull origin uat && ./deploy.sh
+                    EOF
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to Prod') {
+            when {
+                branch 'prod'
+            }
+            steps {
+                script {
+                    echo "Deploying to PROD server"
+                    sh '''
+                    ssh -i ${PROD_SSH_KEY} ec2-user@${PROD_SERVER} << EOF
+                    cd /path/to/your/app && git pull origin prod && ./deploy.sh
+                    EOF
+                    '''
+                }
+            }
+        }
     }
 
     post {
