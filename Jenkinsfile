@@ -21,7 +21,8 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/PritamChaudhari23/jenkins-react.git'
+                // git branch: 'main', url: 'https://github.com/PritamChaudhari23/jenkins-react.git'
+                checkout scm
             }
         }
 
@@ -39,14 +40,14 @@ pipeline {
                 branch 'dev'
             }
             steps {
-                script {
-                    echo "Deploying to DEV server"
-                    sh '''
-                    ssh -i ${DEV_SSH_KEY} ec2-user@${DEV_SERVER} << EOF
-                    cd /path/to/your/app && git pull origin dev && ./deploy.sh
-                    EOF
-                    '''
-                }
+                echo "Deploying to DEV server"
+                // script {
+                //     sh '''
+                //     ssh -i ${DEV_SSH_KEY} ec2-user@${DEV_SERVER} << EOF
+                //     cd /path/to/your/app && git pull origin dev && ./deploy.sh
+                //     EOF
+                //     '''
+                // }
             }
         }
 
@@ -55,14 +56,14 @@ pipeline {
                 branch 'uat'
             }
             steps {
-                script {
-                    echo "Deploying to UAT server"
-                    sh '''
-                    ssh -i ${UAT_SSH_KEY} ec2-user@${UAT_SERVER} << EOF
-                    cd /path/to/your/app && git pull origin uat && ./deploy.sh
-                    EOF
-                    '''
-                }
+                echo "Deploying to UAT server"
+                // script {
+                //     sh '''
+                //     ssh -i ${UAT_SSH_KEY} ec2-user@${UAT_SERVER} << EOF
+                //     cd /path/to/your/app && git pull origin uat && ./deploy.sh
+                //     EOF
+                //     '''
+                // }
             }
         }
 
@@ -71,14 +72,14 @@ pipeline {
                 branch 'prod'
             }
             steps {
-                script {
-                    echo "Deploying to PROD server"
-                    sh '''
-                    ssh -i ${PROD_SSH_KEY} ec2-user@${PROD_SERVER} << EOF
-                    cd /path/to/your/app && git pull origin prod && ./deploy.sh
-                    EOF
-                    '''
-                }
+                echo "Deploying to PROD server"
+                // script {
+                //     sh '''
+                //     ssh -i ${PROD_SSH_KEY} ec2-user@${PROD_SERVER} << EOF
+                //     cd /path/to/your/app && git pull origin prod && ./deploy.sh
+                //     EOF
+                //     '''
+                // }
             }
         }
     }
