@@ -67,7 +67,7 @@ const Products = () => {
   //   setFilteredProducts(filtered);
   // }, [searchText, filterValue, products]);
 
-  <h1>Products Catalog</h1>;
+  <h1>Products Catalog on DEV</h1>;
 
   if (loading) {
     return <label>Loading...</label>;
