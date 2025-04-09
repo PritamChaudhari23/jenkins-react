@@ -1,23 +1,23 @@
 pipeline {
     agent any
 
-    environment {
-        DEV_SERVER = 'dev-ec2-ip'
-        UAT_SERVER = 'uat-ec2-ip'
-        PROD_SERVER = 'prod-ec2-ip'
-        DEV_SSH_KEY = credentials('dev-ssh-key') 
-        UAT_SSH_KEY = credentials('uat-ssh-key')    
-        PROD_SSH_KEY = credentials('prod-ssh-key') 
-    }
+    // environment {
+    //     DEV_SERVER = 'dev-ec2-ip'
+    //     UAT_SERVER = 'uat-ec2-ip'
+    //     PROD_SERVER = 'prod-ec2-ip'
+    //     DEV_SSH_KEY = credentials('dev-ssh-key') 
+    //     UAT_SSH_KEY = credentials('uat-ssh-key')    
+    //     PROD_SSH_KEY = credentials('prod-ssh-key') 
+    // }
 
     stages {
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    // Install node, git, npm in EC2 OR This can be doe during initial setup
-                }
-            }
-        }
+        // stage('Install Dependencies') {
+        //     steps {
+        //         script {
+        //             // Install node, git, npm in EC2 OR This can be doe during initial setup
+        //         }
+        //     }
+        // }
 
         stage('Checkout') {
             steps {
@@ -26,14 +26,14 @@ pipeline {
             }
         }
 
-        stage('Build react app') {
-            steps {
-                script {
-                    sh 'npm install'
-                    sh 'npm run build'
-                }
-            }
-        }
+        // stage('Build react app') {
+        //     steps {
+        //         script {
+        //             sh 'npm install'
+        //             sh 'npm run build'
+        //         }
+        //     }
+        // }
 
         stage('Deploy to Dev') {
             when {
